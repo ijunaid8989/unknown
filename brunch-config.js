@@ -59,11 +59,16 @@ exports.config = {
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": ["jquery", "web/static/js/app"]
     }
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    whitelist: ["phoenix", "phoenix_html"],
+    // styles: {
+    //   bootstrap: ["dist/css/bootstrap.min.css"]
+    // },
+    globals: { $: 'jquery', "jQuery": "jquery"}
   }
 };
