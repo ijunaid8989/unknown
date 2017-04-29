@@ -7,6 +7,7 @@ defmodule Socialistical.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug CORSPlug, origin: ["*"]
   end
 
   pipeline :api do
@@ -16,8 +17,11 @@ defmodule Socialistical.Router do
   scope "/", Socialistical do
     pipe_through :browser # Use the default browser stack
 
+
     get "/", UserController, :index
     get "/sign_up", UserController, :sign_up
+    post "/create_user", UserController, :create
+    options "/create_user", UserController, :nothing
 
     # resources "/users", UserController, except: [:new, :edit]
   end
