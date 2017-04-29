@@ -1,0 +1,22 @@
+<div class="row column align-center medium-6 large-4 container-padded">
+  <form class="log-in-form">
+    <h4 class="text-center">Please Sign up with your details</h4>
+    <label>Firstname
+      <input type="text" placeholder="Firstname">
+    </label>
+    <label>Lastname
+      <input type="text" placeholder="Lastname">
+    </label>
+    <label>Email
+      <input type="email" placeholder="somebody@example.com">
+    </label>
+    <label>Password
+      <input type="password" placeholder="Password">
+    </label>
+    <label>Re-type Password
+      <input type="password" placeholder="Password">
+    </label>
+    <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
+    <p><input type="submit" class="button expanded" value="Sign Up"></input></p>
+  </form>
+</div>

@@ -16,7 +16,10 @@ defmodule Socialistical.Router do
   scope "/", Socialistical do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", UserController, :index
+    get "/sign_up", UserController, :sign_up
+
+    # resources "/users", UserController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
