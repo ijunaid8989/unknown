@@ -22,21 +22,19 @@ defmodule Socialistical.UserController do
         {:ok, user} ->
           Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}]]"
           conn
-          |> put_status(:created)
-          |> redirect(to: "/sign_up")
+          |> put_flash(:info, "Your account has been created. Please login")
+          |> redirect(to: "/")
         {:error, changeset} ->
           errors = Util.parse_changeset(changeset)
-          traverse_errors = error = for {_key, values} <- errors, value <- values, do: "#{value}"
+          traverse_errors = for {_key, values} <- errors, value <- values, do: "#{value}"
           conn
           |> put_flash(:error, traverse_errors |> List.first)
-          |> put_status(404)
           |> redirect(to: "/sign_up")
       end
     else
       {:error, errors} ->
         error = for {_key, values} <- errors, value <- values, do: "#{value}"
         conn
-        |> put_status(404)
         |> put_flash(:error, error |> List.first)
         |> redirect(to: "/sign_up")
     end
