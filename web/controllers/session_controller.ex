@@ -4,6 +4,7 @@ defmodule Socialistical.SessionController do
   def create(conn, params) do
     case Socialistical.Session.login(params, Socialistical.Repo) do
       {:ok, user} ->
+        Socialistical.Session.update_last_login(params, Socialistical.Repo)
         conn
         |> put_session(:current_user, user.id)
         |> put_flash(:info, "Logged in")

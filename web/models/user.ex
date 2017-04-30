@@ -26,6 +26,15 @@ defmodule Socialistical.User do
     end
   end
 
+  defp update_last_signed_in(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true} ->
+        put_change(changeset, :last_signed_in, Ecto.DateTime.utc)
+      _ ->
+        changeset
+    end
+  end
+
   def hash_password(password) do
     Comeonin.Bcrypt.hashpass(password, Comeonin.Bcrypt.gen_salt(12, true))
   end
@@ -41,6 +50,7 @@ defmodule Socialistical.User do
     |> unique_constraint(:email, [message: "Email has already been taken."])
     |> validate_confirmation(:password, [message: "Passwords do not match"])
     |> encrypt_password
+    |> update_last_signed_in
     |> update_change(:firstname, &String.trim/1)
     |> update_change(:lastname, &String.trim/1)
     |> validate_length(:firstname, [min: 3, message: "Firstname should be at least 2 character(s)."])

@@ -1,5 +1,6 @@
 defmodule Socialistical.Session do
   alias Socialistical.User
+  require Logger
 
   def login(params, repo) do
     user = repo.get_by(User, email: String.downcase(params["email"]))
@@ -22,4 +23,14 @@ defmodule Socialistical.Session do
   end
 
   def logged_in?(conn), do: !!current_user(conn)
+
+  def update_last_login(params, repo) do
+    user = repo.get_by(User, email: String.downcase(params["email"]))
+    case user |> User.changeset(%{"last_signed_in" => Ecto.DateTime.utc }) |> Socialistical.Repo.insert_or_update do
+      {:ok, _user} ->
+        Logger.info "Last signed in updated!"
+      {:error, _changeset} ->
+        Logger.error "Last signed in not updated!"
+    end
+  end
 end
