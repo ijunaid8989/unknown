@@ -23,7 +23,8 @@ defmodule Socialistical.UserController do
           Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}]]"
           conn
           |> put_flash(:info, "Your account has been created. Please login")
-          |> redirect(to: "/")
+          |> put_session(:current_user, user.id)
+          |> redirect(to: "/dashboard")
         {:error, changeset} ->
           errors = Util.parse_changeset(changeset)
           traverse_errors = for {_key, values} <- errors, value <- values, do: "#{value}"

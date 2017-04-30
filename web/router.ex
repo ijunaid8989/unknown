@@ -23,6 +23,10 @@ defmodule Socialistical.Router do
     post "/create_user", UserController, :create
     options "/create_user", UserController, :nothing
 
+    post "/session", SessionController, :create
+    delete "/logout", SessionController, :delete
+
+    get "/dashboard", DashboardController, :index
     # resources "/users", UserController, except: [:new, :edit]
   end
 

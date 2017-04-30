@@ -18,7 +18,7 @@
       error = get_flash(@conn, :error)
       %>
       <%= if info do %>
-        <p class="alert alert-info" role="alert"><%= info %></p>
+        <p class="alert-box" role="alert"><%= info %></p>
       <% end %>
       <%= if error do %>
         <p class="alert-box" role="alert"><%= error %></p>
