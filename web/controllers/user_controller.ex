@@ -15,9 +15,9 @@ defmodule Socialistical.UserController do
   end
 
   def create(conn, params) do
-    with {:ok, changeset} <- changeset_is_fine(params)
+    with  {:ok, updated_params} <- merge_username(params),
+          {:ok, changeset} <- changeset_is_fine(updated_params)
     do
-      changeset = User.changeset(%User{}, params)
       case Repo.insert(changeset) do
         {:ok, user} ->
           Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}]]"
@@ -25,13 +25,26 @@ defmodule Socialistical.UserController do
           |> put_status(:created)
           |> redirect(to: "/sign_up")
         {:error, changeset} ->
-          conn |> redirect(to: "/sign_up")
+          errors = Util.parse_changeset(changeset)
+          traverse_errors = error = for {_key, values} <- errors, value <- values, do: "#{value}"
+          conn
+          |> put_flash(:error, traverse_errors |> List.first)
+          |> put_status(404)
+          |> redirect(to: "/sign_up")
       end
     else
       {:error, errors} ->
-        IEx.pry
-        
+        error = for {_key, values} <- errors, value <- values, do: "#{value}"
+        conn
+        |> put_status(404)
+        |> put_flash(:error, error |> List.first)
+        |> redirect(to: "/sign_up")
     end
+  end
+
+  defp merge_username(params) do
+    username = String.split(params["email"], "@") |> List.first
+    {:ok, Map.merge(params, %{"username" => username})}
   end
 
   defp changeset_is_fine(params) do

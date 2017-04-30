@@ -37,15 +37,13 @@ defmodule Socialistical.User do
     struct
     |> cast(params, @required_fields)
     |> validate_required([:firstname, :lastname, :username, :password, :email])
-    |> unique_constraint(:username, [name: :user_username_unique_index, message: "Username has already been taken."])
-    |> unique_constraint(:email, [name: :user_email_unique_index, message: "Email has already been taken."])
+    |> unique_constraint(:username, [message: "Username has already been taken."])
+    |> unique_constraint(:email, [message: "Email has already been taken."])
     |> validate_confirmation(:password, [message: "Passwords do not match"])
     |> encrypt_password
     |> update_change(:firstname, &String.trim/1)
     |> update_change(:lastname, &String.trim/1)
     |> validate_length(:firstname, [min: 3, message: "Firstname should be at least 2 character(s)."])
     |> validate_length(:lastname, [min: 3, message: "Lastname should be at least 2 character(s)."])
-    |> unique_constraint(:email)
-    |> unique_constraint(:username)
   end
 end
