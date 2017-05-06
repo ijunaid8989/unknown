@@ -22,7 +22,7 @@ defmodule Socialistical.UserController do
         {:ok, user} ->
           Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}]]"
           conn
-          |> put_flash(:info, "Your account has been created. Please login")
+          |> put_flash(:info, "Your account has been created.")
           |> put_session(:current_user, user.id)
           |> redirect(to: "/dashboard")
         {:error, changeset} ->

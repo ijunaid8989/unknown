@@ -1,44 +1,23 @@
-<div class="top-bar">
-  <div class="top-bar-left">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">Socialistical</li>
-      <li>
-        <a href="#">One</a>
-<%#         <ul class="menu vertical">
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
-        </ul> %>
-      </li>
-      <li><a href="#">Two</a></li>
-      <li><a href="#">Three</a></li>
-    </ul>
-  </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li class="menu-text"><%= current_user(@conn).email %></li>
-      <li><%= link "Logout", to: session_path(@conn, :delete), method: :delete %></li>
-    </ul>
+<div class="ui pointing menu">
+  <a class="active item">
+    Home
+  </a>
+  <a class="item">
+    Messages
+  </a>
+  <a class="item">
+    Friends
+  </a>
+  <%= link "Logout", to: session_path(@conn, :delete), method: :delete, class: "item" %>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui transparent icon input">
+        <input type="text" placeholder="Search...">
+        <i class="search link icon"></i>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="row small-up-2 medium-up-3 large-up-4">
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
-  <div class="column column-block">
-    <img src="//placehold.it/600x600" class="thumbnail" alt="">
-  </div>
+<div class="ui segment">
+  <p></p>
 </div>

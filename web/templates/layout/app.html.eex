@@ -18,10 +18,22 @@
       error = get_flash(@conn, :error)
       %>
       <%= if info do %>
-        <p class="alert-box" role="alert"><%= info %></p>
+        <div class="ui message">
+          <i class="close icon"></i>
+          <div class="header">
+            Please Listen!
+          </div>
+          <p><%= info %></p>
+        </div>
       <% end %>
       <%= if error do %>
-        <p class="alert-box" role="alert"><%= error %></p>
+        <div class="ui message">
+          <i class="close icon"></i>
+          <div class="header">
+            Please Listen!
+          </div>
+          <p><%= error %></p>
+        </div>
       <% end %>
 
       <main role="main">
@@ -34,7 +46,6 @@
       $(document).ready(function () {
         console.log("JQuery loaded buddy.")
       });
-      $(document).foundation();
     </script>
   </body>
 </html>

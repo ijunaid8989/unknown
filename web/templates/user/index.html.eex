@@ -1,15 +1,28 @@
-<div class="row column align-center medium-6 large-4 container-padded">
-  <form class="log-in-form" method="POST" action="/session">
-    <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
-    <h4 class="text-center">Log in with you email account</h4>
-    <label>Email
-      <input type="email" placeholder="somebody@example.com" name="email">
-    </label>
-    <label>Password
-      <input type="password" placeholder="Password" name="password">
-    </label>
-    <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
-    <p><input type="submit" class="button expanded" value="Log in"></input></p>
-    <p class="text-center"><a href="#">Forgot your password?</a> / <a href="/sign_up">Sign Up</a></p>
-  </form>
+<div class="page-login">
+  <div class="ui centered grid container">
+    <div class="nine wide column">
+      <div class="ui fluid card">
+        <div class="content">
+        <form class="ui form" method="POST" action="/session">
+          <input type="hidden" name="_csrf_token" value="<%= get_csrf_token() %>">
+          <div class="field">
+            <label>Email</label>
+            <input type="text" name="email" placeholder="Eamil">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password">
+          </div>
+          <button class="ui primary labeled icon button" type="submit">
+            <i class="unlock alternate icon"></i>
+            Login
+          </button>
+        </form>
+        <div class="ui message">
+              New to us? <a href="/sign_up">Sign Up</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
