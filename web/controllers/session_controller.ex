@@ -7,11 +7,11 @@ defmodule Socialistical.SessionController do
         Socialistical.Session.update_last_login(params, Socialistical.Repo)
         conn
         |> put_session(:current_user, user.id)
-        |> put_flash(:info, "Logged in")
+        |> put_flash(:info, "You have logged in.")
         |> redirect(to: "/dashboard")
       :error ->
         conn
-        |> put_flash(:info, "Wrong email or password")
+        |> put_flash(:error, "Wrong email or password.")
         |> redirect(to: "/")
     end
   end

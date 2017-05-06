@@ -18,7 +18,7 @@
       error = get_flash(@conn, :error)
       %>
       <%= if info do %>
-        <div class="ui message">
+        <div class="ui info message">
           <i class="close icon"></i>
           <div class="header">
             Please Listen!
@@ -27,7 +27,7 @@
         </div>
       <% end %>
       <%= if error do %>
-        <div class="ui message">
+        <div class="ui negative message">
           <i class="close icon"></i>
           <div class="header">
             Please Listen!
