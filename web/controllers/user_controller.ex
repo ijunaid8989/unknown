@@ -14,6 +14,10 @@ defmodule Socialistical.UserController do
     render(conn, "sign_up.html")
   end
 
+  def sign_in(conn, _params) do
+    render(conn, "login.html")
+  end
+
   def create(conn, params) do
     with  {:ok, updated_params} <- merge_username_last_signed_in(params),
           {:ok, changeset} <- changeset_is_fine(updated_params)

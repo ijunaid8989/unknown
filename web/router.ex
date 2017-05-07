@@ -20,6 +20,7 @@ defmodule Socialistical.Router do
 
     get "/", UserController, :index
     get "/sign_up", UserController, :sign_up
+    get "/sign_in", UserController, :sign_in
     post "/create_user", UserController, :create
     options "/create_user", UserController, :nothing
 
