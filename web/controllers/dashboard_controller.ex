@@ -13,9 +13,4 @@ defmodule Socialistical.DashboardController do
         |> redirect(to: "/")
     end
   end
-
-  defp authentic_user(conn) do
-    id = Plug.Conn.get_session(conn, :current_user)
-    if id, do: Socialistical.Repo.get(User, id)
-  end
 end
