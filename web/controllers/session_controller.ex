@@ -12,7 +12,7 @@ defmodule Socialistical.SessionController do
       :error ->
         conn
         |> put_flash(:error, "Wrong email or password.")
-        |> redirect(to: "/")
+        |> redirect(to: "/sign_in")
     end
   end
 
@@ -20,6 +20,6 @@ defmodule Socialistical.SessionController do
     conn
     |> delete_session(:current_user)
     |> put_flash(:info, "Logged out")
-    |> redirect(to: "/")
+    |> redirect(to: "/sign_in")
   end
 end
