@@ -27,7 +27,6 @@ defmodule Socialistical.Router do
     delete "/logout", SessionController, :delete
 
     get "/dashboard", DashboardController, :index
-    # resources "/users", UserController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.

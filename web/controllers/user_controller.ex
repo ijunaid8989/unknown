@@ -15,12 +15,12 @@ defmodule Socialistical.UserController do
   end
 
   def create(conn, params) do
-    with  {:ok, updated_params} <- merge_username(params),
+    with  {:ok, updated_params} <- merge_username_last_signed_in(params),
           {:ok, changeset} <- changeset_is_fine(updated_params)
     do
       case Repo.insert(changeset) do
         {:ok, user} ->
-          Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}]]"
+          Logger.info "[POST /create_user] [[#{user.username}] [#{user.email}] [#{user.last_signed_in}]]"
           conn
           |> put_flash(:info, "Your account has been created.")
           |> put_session(:current_user, user.id)
@@ -41,9 +41,9 @@ defmodule Socialistical.UserController do
     end
   end
 
-  defp merge_username(params) do
+  defp merge_username_last_signed_in(params) do
     username = String.split(params["email"], "@") |> List.first
-    {:ok, Map.merge(params, %{"username" => username})}
+    {:ok, Map.merge(params, %{"username" => username, "last_signed_in" => Ecto.DateTime.utc})}
   end
 
   defp changeset_is_fine(params) do

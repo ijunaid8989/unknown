@@ -1,7 +1,21 @@
 defmodule Socialistical.DashboardController do
   use Socialistical.Web, :controller
+  import Socialistical.Session
+  alias Socialistical.User
 
   def index(conn, _params) do
-    render conn, "index.html"
+    with %Socialistical.User{} <- current_user(conn) do
+      render conn, "index.html"
+    else
+      _ ->
+        conn
+        |> put_flash(:error, "You must be logged in to see that page :).")
+        |> redirect(to: "/")
+    end
+  end
+
+  defp authentic_user(conn) do
+    id = Plug.Conn.get_session(conn, :current_user)
+    if id, do: Socialistical.Repo.get(User, id)
   end
 end
