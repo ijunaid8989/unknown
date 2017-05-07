@@ -54,7 +54,7 @@ defmodule Socialistical.Mixfile do
      {:cowboy, "~> 1.0"},
      {:cors_plug, "~> 1.2"},
      {:comeonin, "~> 3.0"},
-     {:dotenv, "~> 2.0.0"}
+     {:dotenv, "~> 2.1.0"}
     ]
   end
 
